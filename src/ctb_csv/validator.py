@@ -245,7 +245,8 @@ def validate_csv(csv_path: str | Path) -> list[ValidationIssue]:
             lw_mm_raw = row.get("lineweight_mm", "").strip()
             try:
                 lw_mm = float(lw_mm_raw)
-                expected_mm = STANDARD_LINEWEIGHTS.get(lw)
+                lw_key = lw - 1 if lw > 0 else 0
+                expected_mm = STANDARD_LINEWEIGHTS.get(lw_key)
                 if expected_mm is not None and abs(lw_mm - expected_mm) > 0.001:
                     issues.append(ValidationIssue(
                         row=row_num, aci_color=aci_raw, field="lineweight_mm",

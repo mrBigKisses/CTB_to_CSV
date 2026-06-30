@@ -40,7 +40,10 @@ COLUMNS = [
 def _style_to_row(ps: PlotStyle, lw_table: dict[int, float]) -> dict:
     r, g, b = color_to_rgb(ps.color)
     flag = color_flag(ps.color)
-    lw_mm = lw_table.get(ps.lineweight, "")
+    # Lineweight is 1-based vs the table: value N → table entry N-1.
+    # lineweight=0 is the special "use object" sentinel → table[0] = 0.0.
+    lw_key = ps.lineweight - 1 if ps.lineweight > 0 else 0
+    lw_mm = lw_table.get(lw_key, "")
     return {
         "aci_index":            ps.aci_index,
         "aci_color":            ps.aci_index + 1,

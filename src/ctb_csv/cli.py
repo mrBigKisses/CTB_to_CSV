@@ -7,6 +7,7 @@ from pathlib import Path
 from ctb_csv.ctb_parser import read_ctb, write_ctb
 from ctb_csv.csv_handler import ctb_to_csv, csv_to_ctb
 from ctb_csv.validator import validate_csv
+from ctb_csv.reporter import generate_report
 
 
 @click.group()
@@ -80,6 +81,25 @@ def cmd_validate(csv_file: str):
         for issue in issues:
             click.echo(f"  {issue}")
         sys.exit(1)
+
+
+@cli.command("report")
+@click.argument("ctb_file", type=click.Path(exists=True, dir_okay=False))
+@click.argument("output", required=False)
+@click.option("--pdf", is_flag=True, help="Esporta PDF via weasyprint (richiede: pip install weasyprint)")
+def cmd_report(ctb_file: str, output: str | None, pdf: bool):
+    """Generate an HTML (or PDF) reference sheet of active plot styles."""
+    ctb_path = Path(ctb_file)
+    out_base = Path(output) if output else ctb_path.with_suffix(".html")
+
+    click.echo(f"Lettura: {ctb_path}")
+    ctb = read_ctb(ctb_path)
+
+    result = generate_report(ctb, out_base, source_filename=ctb_path.name, pdf=pdf)
+    click.echo(f"Report scritto: {result}")
+
+    if result.suffix == ".html":
+        click.echo("Apri nel browser e usa Stampa → Salva come PDF per esportare in PDF.")
 
 
 # Allow running as: python -m ctb_csv.cli <command>

@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scheda penne CTB · S10 Generico.ctb</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16130f; --ink2:#4a443c; --muted:#9a9285;
+  --paper:#faf8f3; --card:#ffffff; --line:#e6e0d4; --line2:#d6cfc0;
+  --accent:#b3382c;
+  --warn:#b26a00; --warn-bg:#fbf2e2;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Space Grotesk",system-ui,sans-serif;
+  line-height:1.45; padding:40px 24px 80px;
+}
+.sheet{max-width:960px; margin:0 auto}
+.head{display:flex; justify-content:space-between; align-items:flex-end;
+  gap:24px; padding-bottom:18px; border-bottom:2px solid var(--ink); flex-wrap:wrap}
+.brand{font-weight:700; letter-spacing:.34em; font-size:13px; text-transform:uppercase}
+.brand b{color:var(--accent)}
+.title{font-size:clamp(26px,5vw,42px); font-weight:700; line-height:1.02; margin:.32em 0 .18em}
+.file{font-family:"Space Mono",monospace; font-size:12.5px; color:var(--ink2);
+  background:#fff; border:1px solid var(--line); padding:3px 8px; border-radius:4px}
+.tagline{font-size:12.5px; color:var(--ink2); margin:.35em 0 .5em; max-width:52ch}
+.stats{display:flex; gap:0; font-family:"Space Mono",monospace; text-align:right}
+.stats div{display:flex; flex-direction:column; padding:0 18px}
+.stats div+div{border-left:1px solid var(--line)}
+.stats div:last-child{padding-right:0}
+.stats .v{font-size:24px; font-weight:700; line-height:1}
+.stats .k{font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:4px}
+.v.v-warn{color:var(--warn)}
+.legend{display:flex; flex-wrap:wrap; gap:18px 26px; margin:20px 0 8px;
+  font-size:12.5px; color:var(--ink2); font-family:"Space Mono",monospace}
+.legend span{display:inline-flex; align-items:center; gap:7px}
+.legend .objl{width:13px; height:13px; border-radius:3px;
+  background:repeating-linear-gradient(45deg,#c9c2b4 0 3px,#fff 3px 6px); border:1px solid var(--line2)}
+.legend .ritl{background:var(--accent); color:#fff; font-weight:700; font-size:9.5px;
+  padding:1px 4px; border-radius:3px; letter-spacing:.05em}
+.legend .warnl{background:var(--warn); color:#fff; font-weight:700; font-size:10px;
+  padding:1px 5px; border-radius:3px; line-height:1}
+.grp{margin-top:34px; break-inside:avoid}
+.grp-h{display:grid; grid-template-columns:1fr auto; align-items:baseline;
+  border-bottom:1px solid var(--ink); padding-bottom:7px; column-gap:14px}
+.grp-h h2{margin:0; font-size:19px; font-weight:700; letter-spacing:.01em; grid-column:1}
+.grp-h p{margin:3px 0 0; grid-column:1; font-size:12.5px; color:var(--ink2); max-width:62ch}
+.grp-h .count{grid-row:1; grid-column:2; font-family:"Space Mono",monospace;
+  font-size:13px; color:var(--muted)}
+.grp-h .count::before{content:"× "}
+table.pens{width:100%; border-collapse:collapse; margin-top:6px}
+.pens thead th{font-family:"Space Mono",monospace; font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted); text-align:left; font-weight:400;
+  padding:8px 10px 6px}
+.pens tbody tr{border-top:1px solid var(--line)}
+.pens tbody tr:hover{background:#fffdf7}
+.pens td{padding:9px 10px; vertical-align:middle}
+.c-aci{width:66px} .c-print{width:148px} .c-mm{width:92px} .c-scr{width:104px}
+.c-line{width:150px} .c-desc{width:auto}
+.c-desc{font-size:14px; font-weight:500; letter-spacing:.005em; color:var(--ink); padding-right:16px}
+.chip{display:inline-flex; align-items:center; gap:7px; font-family:"Space Mono",monospace;
+  font-weight:700; font-size:14px}
+.chip i{width:15px; height:15px; border-radius:50%; border:1px solid rgba(0,0,0,.18); flex:none}
+.sw{display:inline-block; width:18px; height:18px; border-radius:4px; vertical-align:middle;
+  margin-right:8px; border:1px solid rgba(0,0,0,.14)}
+.sw-wb{border-color:var(--line2)}
+.obj-sw{background:repeating-linear-gradient(45deg,#c9c2b4 0 3px,#fff 3px 6px);
+  border:1px solid var(--line2)}
+.hex{font-family:"Space Mono",monospace; font-size:12.5px; letter-spacing:.02em}
+.mod{display:inline-block; margin-left:7px; background:var(--accent); color:#fff;
+  font-family:"Space Mono",monospace; font-size:9px; font-weight:700; letter-spacing:.06em;
+  padding:1px 4px; border-radius:3px; vertical-align:middle}
+.c-line{position:relative}
+.ln{display:block; width:100%; min-width:60px; border-radius:2px}
+.c-mm b{font-family:"Space Mono",monospace; font-size:15px; font-weight:700}
+.c-mm .code{display:block; font-family:"Space Mono",monospace; font-size:10px;
+  color:var(--muted); margin-top:2px}
+.scr{display:flex; align-items:center; gap:8px; font-family:"Space Mono",monospace; font-size:12px}
+.scr-bar{width:54px; height:6px; background:#ece6da; border-radius:3px; overflow:hidden}
+.scr-bar i{display:block; height:100%; background:var(--ink)}
+.muted{color:var(--muted)}
+.warn{display:inline-block; margin-top:4px; background:var(--warn); color:#fff;
+  font-family:"Space Mono",monospace; font-size:9.5px; font-weight:700; letter-spacing:.03em;
+  padding:2px 5px; border-radius:3px; white-space:nowrap}
+tr.anom td{background:var(--warn-bg)}
+.pens tbody tr.anom:hover td{background:var(--warn-bg)}
+tr.anom td.c-aci{box-shadow:inset 3px 0 0 var(--warn)}
+.alert{margin:20px 0 4px; border:1px solid var(--warn); background:var(--warn-bg);
+  border-radius:8px; padding:15px 18px}
+.alert.ok{border-color:#9ab98e; background:#f1f6ed}
+.alert-h{font-weight:700; font-size:15px; display:flex; align-items:center; gap:9px}
+.alert-badge{background:var(--warn); color:#fff; font-family:"Space Mono",monospace;
+  font-size:13px; min-width:24px; height:24px; display:inline-flex; align-items:center;
+  justify-content:center; border-radius:6px; padding:0 6px}
+.alert-list{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:7px}
+.alert-list li{font-size:13px; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+.a-aci{font-family:"Space Mono",monospace; font-size:11px; color:var(--muted)}
+.a-is{font-family:"Space Mono",monospace; color:var(--warn); font-weight:700}
+.a-arrow{font-family:"Space Mono",monospace; font-size:12px}
+.a-cls{font-size:11px; color:var(--muted)}
+.alert-foot{margin:12px 0 0; font-size:11.5px; color:var(--ink2);
+  font-family:"Space Mono",monospace; line-height:1.55}
+.foot{margin-top:42px; padding-top:14px; border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  font-family:"Space Mono",monospace; font-size:11px; color:var(--muted)}
+@media(max-width:620px){
+  body{padding:24px 14px 60px}
+  .c-print{width:120px} .hex{display:none}
+  .stats{gap:16px} .stats .v{font-size:19px}
+}
+@media print{
+  body{background:#fff; padding:0}
+  .pens tbody tr:hover{background:none}
+  .grp,.pens tr{break-inside:avoid}
+  @page{margin:14mm}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="head">
+    <div>
+      <div class="brand">CTB <b>to</b> CSV · scheda penne</div>
+      <h1 class="title">Stili di stampa CTB</h1>
+      <p class="tagline">Rappresentazione esatta del file, per individuare e correggere le incoerenze.</p>
+      <span class="file">S10 Generico.ctb · 36 stili attivi su 255</span>
+    </div>
+    <div class="stats">
+      <div><span class="v">30</span><span class="k">Penne</span></div>
+      <div><span class="v">0.05–0.30</span><span class="k">Spessori mm</span></div>
+      <div><span class="v ">0</span><span class="k">Anomalie</span></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i class="objl"></i> <b>OBJ</b> · colore dell'oggetto</span>
+    <span><i class="ritl">RIT</i> colore ritoccato vs ACI nativo</span>
+    <span><i class="warnl">≠</i> spessore incoerente con la classe</span>
+  </div>
+
+  <div class="alert ok">
+      <div class="alert-h">Nessuna incoerenza nome ↔ spessore rilevata</div>
+    </div>
+
+  
+  <section class="grp">
+      <header class="grp-h">
+        <h2>Neri</h2>
+        <p>Stampa in nero.</p>
+        <span class="count">10</span>
+      </header>
+      <table class="pens">
+        <thead><tr>
+          <th class="c-aci">ACI</th><th class="c-desc">Descrizione</th><th class="c-print">Stampa</th>
+          <th class="c-line">Tratto</th><th class="c-mm">Spessore</th><th class="c-scr">Retino</th>
+        </tr></thead>
+        <tbody><tr>
+      <td class="c-aci"><span class="chip" style="--n:#FF0000"><i style="background:#FF0000"></i>1</span></td>
+      <td class="c-desc">Sottile 1</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:2.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.10</b><span class="code">idx 4</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#FFFF00"><i style="background:#FFFF00"></i>2</span></td>
+      <td class="c-desc">Medio 1</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:3.60px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.18</b><span class="code">idx 7</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#00FF00"><i style="background:#00FF00"></i>3</span></td>
+      <td class="c-desc">Grosso 1</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:6.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.30</b><span class="code">idx 10</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#00FFFF"><i style="background:#00FFFF"></i>4</span></td>
+      <td class="c-desc">Medio 2</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:3.60px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.18</b><span class="code">idx 7</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#0000FF"><i style="background:#0000FF"></i>5</span></td>
+      <td class="c-desc">Grosso 2</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:6.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.30</b><span class="code">idx 10</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#FF00FF"><i style="background:#FF00FF"></i>6</span></td>
+      <td class="c-desc">Sottile 2</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:2.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.10</b><span class="code">idx 4</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#FFFFFF"><i style="background:#FFFFFF"></i>7</span></td>
+      <td class="c-desc">Sottile 3</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:2.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.10</b><span class="code">idx 4</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#808080"><i style="background:#808080"></i>8</span></td>
+      <td class="c-desc">Sottilissimo 1</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:1.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.05</b><span class="code">idx 2</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#C0C0C0"><i style="background:#C0C0C0"></i>9</span></td>
+      <td class="c-desc">Sottilissimo 2</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:1.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.05</b><span class="code">idx 2</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#4C4C00"><i style="background:#4C4C00"></i>56</span></td>
+      <td class="c-desc">Mascherine, nero a spessore linea</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:0.60px;background:#000000"></span></td>
+      <td class="c-mm"><b><span class="muted">0.00</span></b><span class="code">idx 0</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr></tbody>
+      </table>
+    </section>
+  <section class="grp">
+      <header class="grp-h">
+        <h2>Rossi</h2>
+        <p>Stampa in rosso.</p>
+        <span class="count">4</span>
+      </header>
+      <table class="pens">
+        <thead><tr>
+          <th class="c-aci">ACI</th><th class="c-desc">Descrizione</th><th class="c-print">Stampa</th>
+          <th class="c-line">Tratto</th><th class="c-mm">Spessore</th><th class="c-scr">Retino</th>
+        </tr></thead>
+        <tbody><tr>
+      <td class="c-aci"><span class="chip" style="--n:#FF3F00"><i style="background:#FF3F00"></i>20</span></td>
+      <td class="c-desc">Rosso a spessore linea</td>
+      <td class="c-print"><span class="sw" style="background:#FF0000"></span><span class="hex">#FF0000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:0.60px;background:#FF0000"></span></td>
+      <td class="c-mm"><b><span class="muted">0.00</span></b><span class="code">idx 0</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#FF9F7F"><i style="background:#FF9F7F"></i>21</span></td>
+      <td class="c-desc">Rosso Sottile</td>
+      <td class="c-print"><span class="sw" style="background:#FF0000"></span><span class="hex">#FF0000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:2.00px;background:#FF0000"></span></td>
+      <td class="c-mm"><b>0.10</b><span class="code">idx 4</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#A52900"><i style="background:#A52900"></i>22</span></td>
+      <td class="c-desc">Rosso Medio</td>
+      <td class="c-print"><span class="sw" style="background:#FF0000"></span><span class="hex">#FF0000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:3.60px;background:#FF0000"></span></td>
+      <td class="c-mm"><b>0.18</b><span class="code">idx 7</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#A56752"><i style="background:#A56752"></i>23</span></td>
+      <td class="c-desc">Rosso Grosso</td>
+      <td class="c-print"><span class="sw" style="background:#FF0000"></span><span class="hex">#FF0000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:6.00px;background:#FF0000"></span></td>
+      <td class="c-mm"><b>0.30</b><span class="code">idx 10</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr></tbody>
+      </table>
+    </section>
+  <section class="grp">
+      <header class="grp-h">
+        <h2>Gialli</h2>
+        <p>Stampa in giallo.</p>
+        <span class="count">4</span>
+      </header>
+      <table class="pens">
+        <thead><tr>
+          <th class="c-aci">ACI</th><th class="c-desc">Descrizione</th><th class="c-print">Stampa</th>
+          <th class="c-line">Tratto</th><th class="c-mm">Spessore</th><th class="c-scr">Retino</th>
+        </tr></thead>
+        <tbody><tr>
+      <td class="c-aci"><span class="chip" style="--n:#FFBF00"><i style="background:#FFBF00"></i>40</span></td>
+      <td class="c-desc">Giallo a spessore linea</td>
+      <td class="c-print"><span class="sw" style="background:#DDDD00"></span><span class="hex">#DDDD00</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:0.60px;background:#DDDD00"></span></td>
+      <td class="c-mm"><b><span class="muted">0.00</span></b><span class="code">idx 0</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#FFDF7F"><i style="background:#FFDF7F"></i>41</span></td>
+      <td class="c-desc">Giallo Sottile</td>
+      <td class="c-print"><span class="sw" style="background:#DDDD00"></span><span class="hex">#DDDD00</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:2.00px;background:#DDDD00"></span></td>
+      <td class="c-mm"><b>0.10</b><span class="code">idx 4</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#A57C00"><i style="background:#A57C00"></i>42</span></td>
+      <td class="c-desc">Giallo Medio</td>
+      <td class="c-print"><span class="sw" style="background:#DDDD00"></span><span class="hex">#DDDD00</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:3.60px;background:#DDDD00"></span></td>
+      <td class="c-mm"><b>0.18</b><span class="code">idx 7</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#A59152"><i style="background:#A59152"></i>43</span></td>
+      <td class="c-desc">Giallo Grosso</td>
+      <td class="c-print"><span class="sw" style="background:#DDDD00"></span><span class="hex">#DDDD00</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:6.00px;background:#DDDD00"></span></td>
+      <td class="c-mm"><b>0.30</b><span class="code">idx 10</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr></tbody>
+      </table>
+    </section>
+  <section class="grp">
+      <header class="grp-h">
+        <h2>Verdi</h2>
+        <p>Stampa in verde.</p>
+        <span class="count">4</span>
+      </header>
+      <table class="pens">
+        <thead><tr>
+          <th class="c-aci">ACI</th><th class="c-desc">Descrizione</th><th class="c-print">Stampa</th>
+          <th class="c-line">Tratto</th><th class="c-mm">Spessore</th><th class="c-scr">Retino</th>
+        </tr></thead>
+        <tbody><tr>
+      <td class="c-aci"><span class="chip" style="--n:#3FFF00"><i style="background:#3FFF00"></i>80</span></td>
+      <td class="c-desc">Verde a spessore linea</td>
+      <td class="c-print"><span class="sw" style="background:#00B800"></span><span class="hex">#00B800</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:0.60px;background:#00B800"></span></td>
+      <td class="c-mm"><b><span class="muted">0.00</span></b><span class="code">idx 0</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#9FFF7F"><i style="background:#9FFF7F"></i>81</span></td>
+      <td class="c-desc">Verde Sottile</td>
+      <td class="c-print"><span class="sw" style="background:#00B800"></span><span class="hex">#00B800</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:2.00px;background:#00B800"></span></td>
+      <td class="c-mm"><b>0.10</b><span class="code">idx 4</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#29A500"><i style="background:#29A500"></i>82</span></td>
+      <td class="c-desc">Verde Medio</td>
+      <td class="c-print"><span class="sw" style="background:#00B800"></span><span class="hex">#00B800</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:3.60px;background:#00B800"></span></td>
+      <td class="c-mm"><b>0.18</b><span class="code">idx 7</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#67A552"><i style="background:#67A552"></i>83</span></td>
+      <td class="c-desc">Verde Grosso</td>
+      <td class="c-print"><span class="sw" style="background:#00B800"></span><span class="hex">#00B800</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:6.00px;background:#00B800"></span></td>
+      <td class="c-mm"><b>0.30</b><span class="code">idx 10</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr></tbody>
+      </table>
+    </section>
+  <section class="grp">
+      <header class="grp-h">
+        <h2>Blu</h2>
+        <p>Stampa in blu.</p>
+        <span class="count">4</span>
+      </header>
+      <table class="pens">
+        <thead><tr>
+          <th class="c-aci">ACI</th><th class="c-desc">Descrizione</th><th class="c-print">Stampa</th>
+          <th class="c-line">Tratto</th><th class="c-mm">Spessore</th><th class="c-scr">Retino</th>
+        </tr></thead>
+        <tbody><tr>
+      <td class="c-aci"><span class="chip" style="--n:#007FFF"><i style="background:#007FFF"></i>150</span></td>
+      <td class="c-desc">Blu a spessore linea</td>
+      <td class="c-print"><span class="sw" style="background:#006EDD"></span><span class="hex">#006EDD</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:0.60px;background:#006EDD"></span></td>
+      <td class="c-mm"><b><span class="muted">0.00</span></b><span class="code">idx 0</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#7FBFFF"><i style="background:#7FBFFF"></i>151</span></td>
+      <td class="c-desc">Blu Sottile</td>
+      <td class="c-print"><span class="sw" style="background:#006EDD"></span><span class="hex">#006EDD</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:2.00px;background:#006EDD"></span></td>
+      <td class="c-mm"><b>0.10</b><span class="code">idx 4</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#0052A5"><i style="background:#0052A5"></i>152</span></td>
+      <td class="c-desc">Blu Medio</td>
+      <td class="c-print"><span class="sw" style="background:#006EDD"></span><span class="hex">#006EDD</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:3.60px;background:#006EDD"></span></td>
+      <td class="c-mm"><b>0.18</b><span class="code">idx 7</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#527CA5"><i style="background:#527CA5"></i>153</span></td>
+      <td class="c-desc">Blu Grosso</td>
+      <td class="c-print"><span class="sw" style="background:#006EDD"></span><span class="hex">#006EDD</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:6.00px;background:#006EDD"></span></td>
+      <td class="c-mm"><b>0.30</b><span class="code">idx 10</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr></tbody>
+      </table>
+    </section>
+  <section class="grp">
+      <header class="grp-h">
+        <h2>Magenta</h2>
+        <p>Stampa in magenta.</p>
+        <span class="count">4</span>
+      </header>
+      <table class="pens">
+        <thead><tr>
+          <th class="c-aci">ACI</th><th class="c-desc">Descrizione</th><th class="c-print">Stampa</th>
+          <th class="c-line">Tratto</th><th class="c-mm">Spessore</th><th class="c-scr">Retino</th>
+        </tr></thead>
+        <tbody><tr>
+      <td class="c-aci"><span class="chip" style="--n:#FF00FF"><i style="background:#FF00FF"></i>210</span></td>
+      <td class="c-desc">Magenta a spessore linea</td>
+      <td class="c-print"><span class="sw" style="background:#FF00FF"></span><span class="hex">#FF00FF</span></td>
+      <td class="c-line"><span class="ln" style="height:0.60px;background:#FF00FF"></span></td>
+      <td class="c-mm"><b><span class="muted">0.00</span></b><span class="code">idx 0</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#FF7FFF"><i style="background:#FF7FFF"></i>211</span></td>
+      <td class="c-desc">Magenta Sottile</td>
+      <td class="c-print"><span class="sw" style="background:#FF00FF"></span><span class="hex">#FF00FF</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:2.00px;background:#FF00FF"></span></td>
+      <td class="c-mm"><b>0.10</b><span class="code">idx 4</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#A500A5"><i style="background:#A500A5"></i>212</span></td>
+      <td class="c-desc">Magenta Medio</td>
+      <td class="c-print"><span class="sw" style="background:#FF00FF"></span><span class="hex">#FF00FF</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:3.60px;background:#FF00FF"></span></td>
+      <td class="c-mm"><b>0.18</b><span class="code">idx 7</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#A552A5"><i style="background:#A552A5"></i>213</span></td>
+      <td class="c-desc">Magemta Grosso</td>
+      <td class="c-print"><span class="sw" style="background:#FF00FF"></span><span class="hex">#FF00FF</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:6.00px;background:#FF00FF"></span></td>
+      <td class="c-mm"><b>0.30</b><span class="code">idx 10</span></td>
+      <td class="c-scr"><span class="muted">—</span></td>
+    </tr></tbody>
+      </table>
+    </section>
+  <section class="grp">
+      <header class="grp-h">
+        <h2>Mezzitoni · Screening</h2>
+        <p>Nero a retino decrescente: campiture e sfondi graduati.</p>
+        <span class="count">6</span>
+      </header>
+      <table class="pens">
+        <thead><tr>
+          <th class="c-aci">ACI</th><th class="c-desc">Descrizione</th><th class="c-print">Stampa</th>
+          <th class="c-line">Tratto</th><th class="c-mm">Spessore</th><th class="c-scr">Retino</th>
+        </tr></thead>
+        <tbody><tr>
+      <td class="c-aci"><span class="chip" style="--n:#000000"><i style="background:#000000"></i>250</span></td>
+      <td class="c-desc">grigio 80%</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span></td>
+      <td class="c-line"><span class="ln" style="height:1.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.05</b><span class="code">idx 2</span></td>
+      <td class="c-scr"><span class="scr"><span class="scr-bar"><i style="width:80%"></i></span>80%</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#656565"><i style="background:#656565"></i>251</span></td>
+      <td class="c-desc">grigio 60%</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:1.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.05</b><span class="code">idx 2</span></td>
+      <td class="c-scr"><span class="scr"><span class="scr-bar"><i style="width:60%"></i></span>60%</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#666666"><i style="background:#666666"></i>252</span></td>
+      <td class="c-desc">grigio 40%</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:1.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.05</b><span class="code">idx 2</span></td>
+      <td class="c-scr"><span class="scr"><span class="scr-bar"><i style="width:40%"></i></span>40%</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#999999"><i style="background:#999999"></i>253</span></td>
+      <td class="c-desc">grigio 20%</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:1.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.05</b><span class="code">idx 2</span></td>
+      <td class="c-scr"><span class="scr"><span class="scr-bar"><i style="width:20%"></i></span>20%</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#CCCCCC"><i style="background:#CCCCCC"></i>254</span></td>
+      <td class="c-desc">grigio 10%</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:1.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.05</b><span class="code">idx 2</span></td>
+      <td class="c-scr"><span class="scr"><span class="scr-bar"><i style="width:10%"></i></span>10%</span></td>
+    </tr>
+<tr>
+      <td class="c-aci"><span class="chip" style="--n:#FFFFFF"><i style="background:#FFFFFF"></i>255</span></td>
+      <td class="c-desc">Maschera Bianca</td>
+      <td class="c-print"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span><span class="mod" title="colore ritoccato rispetto all'ACI nativo">RIT</span></td>
+      <td class="c-line"><span class="ln" style="height:1.00px;background:#000000"></span></td>
+      <td class="c-mm"><b>0.05</b><span class="code">idx 2</span></td>
+      <td class="c-scr"><span class="scr"><span class="scr-bar"><i style="width:0%"></i></span>0%</span></td>
+    </tr></tbody>
+      </table>
+    </section>
+
+  <div class="foot">
+    <span>CTB to CSV · scheda di riferimento penne</span>
+    <span>generato il 2026-06-30 14:20</span>
+  </div>
+
+</div>
+</body>
+</html>

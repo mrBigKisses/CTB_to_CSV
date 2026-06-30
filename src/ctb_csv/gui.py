@@ -8,6 +8,7 @@ from pathlib import Path
 from ctb_csv.ctb_parser import read_ctb, write_ctb
 from ctb_csv.csv_handler import ctb_to_csv, csv_to_ctb
 from ctb_csv.validator import validate_csv
+from ctb_csv.reporter import generate_report
 
 
 # ── Colour palette ────────────────────────────────────────────────────────────
@@ -102,6 +103,21 @@ class App(tk.Tk):
         tk.Button(btn_row, text="  Converti CSV → CTB  ", command=self._run_csv2ctb,
                   bg=ACCENT, fg="white", activebackground="#5a60d4",
                   relief="flat", font=FONT, padx=16, pady=4).pack(side="left", padx=4)
+
+        # ── Report section ────────────────────────────────────────────────────
+        ttk.Separator(self, orient="horizontal").pack(fill="x", padx=20, pady=2)
+        section3 = tk.LabelFrame(self, text=" Report HTML / PDF ", bg=BG, fg=ACCENT,
+                                 font=FONT, relief="groove", bd=1)
+        section3.pack(fill="x", padx=20, pady=6)
+
+        rep_row = tk.Frame(section3, bg=BG)
+        rep_row.pack(pady=8)
+        tk.Button(rep_row, text="  Genera Report (HTML)  ", command=self._run_report_html,
+                  bg=PANEL, fg=FG, activebackground=ACCENT,
+                  relief="flat", font=FONT, padx=14, pady=4).pack(side="left", padx=4)
+        tk.Button(rep_row, text="  Genera Report (PDF)  ", command=self._run_report_pdf,
+                  bg=PANEL, fg=FG, activebackground=ACCENT,
+                  relief="flat", font=FONT, padx=14, pady=4).pack(side="left", padx=4)
 
         # ── Log area ─────────────────────────────────────────────────────────
         ttk.Separator(self, orient="horizontal").pack(fill="x", padx=20, pady=4)
@@ -271,6 +287,43 @@ class App(tk.Tk):
         except Exception as e:
             self._log_err(f"Errore: {e}")
             self._set_status("Errore durante la conversione.")
+
+    # ── Report actions ────────────────────────────────────────────────────────
+
+    def _run_report_html(self):
+        if not self._ctb_path:
+            messagebox.showwarning("File mancante", "Seleziona prima un file .ctb")
+            return
+        self._run_in_thread(lambda: self._do_report(pdf=False))
+
+    def _run_report_pdf(self):
+        if not self._ctb_path:
+            messagebox.showwarning("File mancante", "Seleziona prima un file .ctb")
+            return
+        self._run_in_thread(lambda: self._do_report(pdf=True))
+
+    def _do_report(self, pdf: bool = False):
+        import webbrowser
+        try:
+            label = "PDF" if pdf else "HTML"
+            self._set_status(f"Generazione report {label} in corso…")
+            self._log_info(f"Lettura: {self._ctb_path}")
+            ctb = read_ctb(self._ctb_path)
+            out_base = self._ctb_path.with_suffix(".html")
+            result = generate_report(
+                ctb,
+                out_base,
+                source_filename=self._ctb_path.name,
+                pdf=pdf,
+            )
+            self._log_ok(f"Report scritto: {result}")
+            self._set_status(f"Fatto: {result.name}")
+            if not pdf or result.suffix == ".html":
+                if result.suffix == ".html":
+                    webbrowser.open(result.as_uri())
+        except Exception as e:
+            self._log_err(f"Errore: {e}")
+            self._set_status("Errore durante la generazione del report.")
 
 
 def main():
