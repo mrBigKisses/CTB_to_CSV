@@ -135,12 +135,16 @@ def _is_template_description(desc: str) -> bool:
     return not desc or re.match(r"^Descrizione_\d+$", desc.strip()) is not None
 
 
-def _build_groups(ctb: CTBFile) -> list[Group]:
+def _build_groups(ctb: CTBFile, *, use_llm: bool = False) -> list[Group]:
     rows = [
         _build_pen_row(ps, ctb.lineweight_table)
         for ps in sorted(ctb.plot_styles, key=lambda p: p.aci_index)
         if _is_active(ps)
     ]
+
+    if use_llm:
+        from ctb_csv.llm_grouper import infer_groups
+        return infer_groups(rows)
 
     screening: Group = Group(
         name="Mezzitoni · Screening",
@@ -163,16 +167,9 @@ def _build_groups(ctb: CTBFile) -> list[Group]:
                 )
             color_groups[key].rows.append(row)
 
-    # Sort colour groups: black first, then by hue
-    def hue_key(g: Group) -> float:
-        r, gr, b = g.rows[0].print_rgb if g.rows else (0, 0, 0)
-        if (r, gr, b) == (0, 0, 0):
-            return -1.0
-        import colorsys
-        h, _, _ = colorsys.rgb_to_hsv(r / 255, gr / 255, b / 255)
-        return h
-
-    groups = sorted(color_groups.values(), key=hue_key)
+    # Sort groups by the ACI index of their first (lowest-numbered) pen
+    groups = sorted(color_groups.values(),
+                    key=lambda g: g.rows[0].ps.aci_index if g.rows else 9999)
 
     if screening.rows:
         groups.append(screening)
@@ -210,7 +207,7 @@ _CSS = """
   --accent:#b3382c;
   --warn:#b26a00; --warn-bg:#fbf2e2;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0; background:var(--paper); color:var(--ink);
@@ -313,7 +310,8 @@ tr.anom td.c-aci{box-shadow:inset 3px 0 0 var(--warn)}
 @media print{
   body{background:#fff; padding:0}
   .pens tbody tr:hover{background:none}
-  .grp,.pens tr{break-inside:avoid}
+  .pens tr{break-inside:avoid}
+  .grp-h{break-after:avoid}
   @page{margin:14mm}
 }
 """
@@ -412,8 +410,8 @@ def _group_html(g: Group) -> str:
     </section>"""
 
 
-def _build_html(ctb: CTBFile, source_filename: str = "") -> str:
-    groups = _build_groups(ctb)
+def _build_html(ctb: CTBFile, source_filename: str = "", *, use_llm: bool = False) -> str:
+    groups = _build_groups(ctb, use_llm=use_llm)
 
     # Run anomaly detection
     all_rows: list[PenRow] = [r for g in groups for r in g.rows]
@@ -522,6 +520,7 @@ def generate_report(
     *,
     source_filename: str = "",
     pdf: bool = False,
+    use_llm: bool = False,
 ) -> Path:
     """Generate an HTML (and optionally PDF) report for the given CTBFile.
 
@@ -531,11 +530,14 @@ def generate_report(
         source_filename: Original filename shown in the report header.
         pdf:             If True, try to export PDF (requires weasyprint).
                          Falls back to HTML + browser if weasyprint is absent.
+        use_llm:         If True, delegate grouping to the Claude API instead
+                         of the heuristic colour-distance algorithm.
+                         Requires ANTHROPIC_API_KEY env var and ``pip install anthropic``.
 
     Returns:
         The path to the generated file.
     """
-    html_text = _build_html(ctb, source_filename=source_filename)
+    html_text = _build_html(ctb, source_filename=source_filename, use_llm=use_llm)
 
     if pdf:
         try:

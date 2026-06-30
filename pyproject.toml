@@ -12,9 +12,15 @@ dependencies = [
     "click>=8.1",
 ]
 
+[project.optional-dependencies]
+ai = ["anthropic>=0.40"]
+pdf = ["weasyprint"]
+all = ["anthropic>=0.40", "weasyprint"]
+
 [project.scripts]
-ctb2csv = "ctb_csv.cli:ctb2csv"
-csv2ctb = "ctb_csv.cli:csv2ctb"
+ctb-gui  = "ctb_csv.gui:main"
+ctb2csv  = "ctb_csv.cli:ctb2csv"
+csv2ctb  = "ctb_csv.cli:csv2ctb"
 validate = "ctb_csv.cli:validate_csv"
 
 [tool.setuptools.packages.find]

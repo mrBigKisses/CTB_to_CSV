@@ -87,7 +87,8 @@ def cmd_validate(csv_file: str):
 @click.argument("ctb_file", type=click.Path(exists=True, dir_okay=False))
 @click.argument("output", required=False)
 @click.option("--pdf", is_flag=True, help="Esporta PDF via weasyprint (richiede: pip install weasyprint)")
-def cmd_report(ctb_file: str, output: str | None, pdf: bool):
+@click.option("--llm", is_flag=True, help="Usa Claude AI per inferire i raggruppamenti (richiede ANTHROPIC_API_KEY e: pip install anthropic)")
+def cmd_report(ctb_file: str, output: str | None, pdf: bool, llm: bool):
     """Generate an HTML (or PDF) reference sheet of active plot styles."""
     ctb_path = Path(ctb_file)
     out_base = Path(output) if output else ctb_path.with_suffix(".html")
@@ -95,11 +96,14 @@ def cmd_report(ctb_file: str, output: str | None, pdf: bool):
     click.echo(f"Lettura: {ctb_path}")
     ctb = read_ctb(ctb_path)
 
-    result = generate_report(ctb, out_base, source_filename=ctb_path.name, pdf=pdf)
+    if llm:
+        click.echo("Inferenza gruppi via Claude AI…")
+
+    result = generate_report(ctb, out_base, source_filename=ctb_path.name, pdf=pdf, use_llm=llm)
     click.echo(f"Report scritto: {result}")
 
     if result.suffix == ".html":
-        click.echo("Apri nel browser e usa Stampa → Salva come PDF per esportare in PDF.")
+        click.echo("Apri nel browser e usa Stampa > Salva come PDF per esportare in PDF.")
 
 
 # Allow running as: python -m ctb_csv.cli <command>
