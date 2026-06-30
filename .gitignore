@@ -21,6 +21,7 @@ env/
 .DS_Store
 Thumbs.db
 
-# Project
-*.ctb.bak
+# Project — generated files (keep .ctb samples, ignore generated outputs)
+samples/*_roundtrip.ctb
+samples/*_decompressed.txt
 samples/output/
