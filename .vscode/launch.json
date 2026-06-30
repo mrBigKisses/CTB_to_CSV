@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run GUI",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "ctb_csv",
+      "cwd": "${workspaceFolder}",
+      "env": { "PYTHONPATH": "${workspaceFolder}/src" }
+    },
+    {
+      "name": "CTB → CSV (debug)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "ctb_csv.cli",
+      "args": ["ctb2csv", "${input:ctbFile}", "output.csv"],
+      "cwd": "${workspaceFolder}",
+      "env": { "PYTHONPATH": "${workspaceFolder}/src" }
+    }
+  ]
+}
